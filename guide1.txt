@@ -38,13 +38,13 @@ Explain the significance of the categories of data models. Which type of model i
 
 Explain the structure and significance of the three-schema architecture.
 - The three-schema architecture contains:
-	- an internal level, which has an internal schema that describes the 		physical storage structure of the database;
-	- a conceptual level that has a conceptual schema, which describes the 		structure of the whole database for a community of users; and
-	- an external or view level which includes a number of external schemas 	or user views that each describe the part of the database that a 		particular user group is interested in and hides the rest of the database 	from that user group. 
+	- an internal level, which has an internal schema that describes the physical storage structure of the database;
+	- a conceptual level that has a conceptual schema, which describes the 	structure of the whole database for a community of 		users; and
+	- an external or view level which includes a number of external schemas or user views that each describe the part of the 		database that a particular user group is interested in and hides the rest of the database from that user group. 
 - The three-schema architecture creates convenience for the user, as it allows visualization of the schema levels in a database system. 
 
 Explain the tiers used in a typical web-based information system.
 - Many web applications use the three-tier architecture where 
 	- the bottom layer includes all data management services; 
-	- the middle layer acts as an application or web server (sometimes called 	the business logic layer) that runs application programs and stores 		business rules that are used to access data from the database server 		(bottom layer); and 
-	- the top layer is the client layer which is sometimes called the 		presentation layer. It displays information to the user and allows data 	entry. It could be a GUI or a web interface. 
+	- the middle layer acts as an application or web server (sometimes called the business logic layer) that runs application 		programs and stores business rules that are used to access data from the database server (bottom layer); and 
+	- the top layer is the client layer which is sometimes called the presentation layer. It displays information to the user and 		allows data entry. It could be a GUI or a web interface. 
