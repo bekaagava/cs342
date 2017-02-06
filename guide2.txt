@@ -1,0 +1,40 @@
+Chapter 5 (focus primarily on Sections 5.1–5.2)
+
+Who invented the relational data model? When and where did they do their work?
+
+- Ted Codd of IBM Research first introduced the relational data model in 1970.
+
+Explain the following terms:
+
+relation - this is a set of tuples where each member is a member of a data domain.
+ 
+attribute - this is a column header. 
+
+domain - this is a set of atomic (indivisible) values. 
+
+n-tuple - this is an ordered list of n values where each value is an element of a domain.
+
+NULL value - this represents an attribute whose value is unknown or does not exist for some individual tuple. 
+
+primary, foreign, candidate and super keys 
+
+- Primary keys are columns or combinations of columns that uniquely identify records.
+- Foreign keys are fields (or collections of fields) in one table that uniquely identify a row of another table or the same table.
+- Candidate key can be any column or a combination of columns that can qualify as unique key in database.
+- A superkey SK specify a uniqueness constraint that no two distinct tuples in any relation state of a relation schema can have the same value for the SK.
+
+
+referenced and referencing records - 
+referenced records are referred to by a foreign key which is usually present in the referencing record. 
+
+
+Are tuples in a relation ordered? How about attribute values in a tuple? Explain why or why not.
+
+No, tuples in a relation are not ordered since a relation is defined as a set of tuples and mathematically, elements of a set have no order among them.
+
+Yes, attribute values in a tuple are ordered since they make a list.
+
+
+Can attributes have multiple values in a single n-tuple? Why or why not?
+
+No, attributes cannot have multiple values in a single n-tuple because the n-tuple only has one element, meaning that the attribute would have a single value. 
