@@ -1,0 +1,22 @@
+Exercise 1.14
+
+1.14. Consider Figure 1.2.a. If the name of the ‘CS’ (Computer Science) Department changes to ‘CSSE’ (Computer Science and Software Engineering) Department and the corresponding prefix for the course number also changes, identify the columns in the database that would need to be updated.
+
+- The columns that would need to be updated are:
+ 	- STUDENT.Major
+	- COURSE.Course_number
+	- COURSE.Department
+	- SECTION.Course_number
+	- PREREQUISITE.Course_number
+	- PREREQUISITE.Prerequisite_number
+
+b. Can you restructure the columns in the COURSE, SECTION, and PREREQUISITE tables so that only one column will need to be updated?
+
+- The columns can be restructured in the following way:
+In each table, every course_number column should be split into two columns - one column for the course department and one for the actual course number (Note that in the COURSE table there is a department column that would be similar to the new course department column, so the new course department column may not be needed). The prerequisite_number column should also be split into two columns - one column for the prerequisite department and one for the actual prerequisite number. 
+
+
+In addition, consider whether you can restructure the schema so that only one field needs to be changed. If it’s possible, explain how. If not, explain why not.
+
+- It is not possible to restructure the schema so that only one field needs to be changed because that would require collapsing multiple columns (the course and prerequisite columns for example) and rows into one field and if that is the case, the data in that field may be hard to use. 
+ 

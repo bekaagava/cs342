@@ -1,0 +1,66 @@
+Exercise 2.13
+
+Choose a database application with which you are familiar. Design a schema and show a sample database for that application, using the notation of Figures 1.2 and 2.1. What types of additional information and constraints would you like to represent in the schema? Think of several users of your database, and design a view for each.
+
+- Schema:
+College(ID, name)
+Course(ID, course_name, course_department, course_number, course_semester, course_year, credit_hours, college_ID)
+Section(ID, section_name, professor, start_time, end_time, course_day, course_ID)
+CourseSection(course_ID, section_ID, start_time, end_time, course_day)
+Student(ID, first_name, last_name, college_ID)
+StudentCourse(student_ID, course_ID, section_ID, schedule_name)
+
+- Sample Database:
+College:
+ID	Name
+0001	Calvin College
+0002	Hope College
+
+Course:
+ID	course_name	course_department	course_number	course_semester		course_year	credit_hours	college_ID
+100	Thermodynamics	ENGR			206		Fall			2016		4		0001
+101	Fishing		PER			180		Spring			2017		1		0001
+
+Section:
+ID	section_name	professor	course_ID
+001	A		Kurt DeVos	100
+002	B		Kurt DeVos	100
+
+CourseSection:
+course_ID	section_ID	start_time	end_time	course_day
+100		001		1:30 pm		2:20 pm		M
+100		001		1:30 pm		2:20 pm		W
+100		001		1:30 pm		3:30 pm		F
+100		002		11:30 am	12:45 pm	T
+
+
+Student:
+ID	first_name	last_name	college_ID
+20000	Beka		Agava		0001
+20001	George		Haverford	0002
+
+StudentCourse:
+Student_ID	course_ID	section_ID	schedule_name
+20000		100		001		My Spring 2017 Schedule
+
+
+
+
+
+
+- Constraints:
+The entity integrity could be maintained by making sure that the following columns have unique values within their tables:
+	- ID
+
+In order to maintain referential integrity, the values in the following fields must match the values in the corresponding tables:
+- Course.college_ID must have a matching value in College.ID
+- Section.course_ID must have a matching value in Course.ID
+- CourseSection.course_ID must have a matching value in Course.ID
+- CourseSection.section_ID must have a matching value in Section.ID
+- StudentCourse.student_ID must have a matching value in Student.ID
+- StudentCourse.course_ID must have a matching value in Course.ID
+- StudentCourse.section_ID must have a matching value in Section.ID
+
+The domain integrity could be maintained by restricting the data types for certain fields:
+- The course_year is a 4-digit number
+- The start_time and end_time are in the 12-hour clock time format 
