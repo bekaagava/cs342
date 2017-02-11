@@ -1,0 +1,6 @@
+Exercise 2.2
+
+a. Yes I can add a constraint that requires that all movies having a non-NULL score value must also have more than 1000 votes. I would specify - CHECK(score IS NULL OR votes > 1000) - if the score is not null then it checks that the votes are greater than 1000. 
+
+
+b. If a table already exists without a constraint and it needs one, instead of recreating the table, you create a constraint on the existing table. This would help with data cleansing processes. 
