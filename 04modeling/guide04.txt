@@ -1,0 +1,33 @@
+Explain the four informal guidelines discussed in Section 14.1.
+
+The four informal guidelines that may be used to determine the quality of the relation schema design are:
+- Making sure that the semantics of the attributes is clear in the schema. The semantics of a relation refers to its meaning resulting from the interpretation of attribute values in a tuple. Easily explained relation semantics allow for better relation schema design.For example, the semantics of a STUDENT schema in a database should have each STUDENT tuple representing a student entity with values for the student’s name, birthdate, enrollment date, major, etc. 
+
+- Reducing the redundant information in tuples. This helps with achieving the goal of schema design that is to minimize the storage space used by the base relations. The base relation schema should be design in such a way that no insertion, deletion, or modification anomalies are present in the relations. If they are present, they should be clearly noted, and ensure that the programs that update the database will operate correctly. 
+
+- Reducing the NULL values in tuples. Grouping many attributes together into a “fat” relation in some schema designs could result in many NULLs in those tuples if many of the attributes so not apply to all tuples in the relation. This can waste space at the storage level and also lead to difficulties with understanding the meaning of attributes and with specifying JOIN operations at the logical level. NULLs are also hard to account for when aggregate operations such as COUNT or SUM are applied. NULLs could also have multiple interpretations. 
+
+-Disallowing the possibility of generating spurious tuples. Relation schemas should be designed so that they can be joined with equality conditions on attributes that are appropriately related (e.g. primary key, foreign key) pairs in a way that guarantees that no spurious tuples are generated. 
+
+Explain the terms functional dependency (for Monday, see Section 14.2) by giving an example of each and showing how it satisfies the term’s formal definition.
+
+Functional Dependency: This is a constraint between two sets of attributes from the database. 
+
+Example:
+If R = NewStudent(studentId, lastName, major, SSN)
+
+The functional dependencies in R include:
+
+- {studentId} -> {lastName} (but this is not reversible) - the value of the student ID uniquely determines the student’s last name but not vice versa. 
+- {studentId} -> {lastName, major, SSN} - the value of the student ID uniquely determines the student’s last name, major and social security number
+- {SSN} -> {studentId, lastName, major} - the value of the student’s SSN uniquely determines the student’s ID, last name and major. 
+
+
+Explain BCNF (for Monday, see Section 14.5) by giving an example relation and proving whether its schema conforms (or fails to conform) to the definitions of each normal form.
+
+- BCNF: 
+
+Explain when one would one want to normalize a relational schema and when one might want to de-normalize one.
+- Normalization is used to reduce insertion, update and delete anomalies. To allow easy general-purpose querying, one must normalize the relational schema. 
+
+- Denormalization is used to increase the performance of the relational schema. Redundant data that will be useful to the schema is added.
