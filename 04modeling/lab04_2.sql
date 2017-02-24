@@ -7,6 +7,7 @@
 -- CS 342, Spring, 2017
 -- kvlinden, baa8
 
+DROP TABLE PersonView;
 DROP TABLE PersonTeam;
 DROP TABLE PersonVisit;
 
@@ -81,3 +82,18 @@ c. No, the derived "view" schema and the original schema are not equally appropr
    be multiple records for the smae team with Shamkant as personName.
    If on the other hand the church needs to figure out how many visits a team has had, the derived "view" schema is better. 
 */
+
+-- Homework 4 Exercise 4.2 d
+create table PersonView(
+	name varchar(10),
+    team varchar(10),
+	visit date
+	);
+	
+insert into PersonView (name, team, visit)
+select pt.personName, pt.teamName, pv.personVisit 
+from PersonTeam pt join PersonVisit pv
+on pt.personName = pv.personName;
+
+--test
+select * from PersonView;
