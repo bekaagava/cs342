@@ -9,6 +9,9 @@
 -- Spring, 2017
 -- kvlinden, baa8
 
+drop table Person_Team;
+drop table Team;
+drop table Person;
 drop table AltPerson;
 
 CREATE TABLE AltPerson (
@@ -60,7 +63,38 @@ a. The relation is not well designed because:
 
 b. Properly Normalized Schema for Database:
    Person(personId, name, status, mentorId) - mentorId is a foreign key that refers to personId (the primary key)
-   Team(teamId, teamName, time) - teamId is the primary key
-   Person_Team(personId, teamId, role)
+   Team(teamName, time)
+   Person_Team(personId, teamName, role)
    
 */
+
+-- Homework Exercise 4.1 c
+create table Person (
+	ID integer PRIMARY KEY,
+	name varchar(10),
+	status char(1),
+	mentorId integer,
+	foreign key (mentorId) references Person(ID) ON DELETE SET NULL,
+	check (mentorId != ID)
+	);
+	
+create table Team (
+	teamName varchar(10) PRIMARY KEY,
+    teamTime varchar(10)
+	);
+	
+create table Person_Team (
+	personId integer,
+	teamName varchar(10),
+	role varchar(10),
+	foreign key (personId) references Person(ID) ON DELETE SET NULL,
+	foreign key (teamName) references Team(teamName) ON DELETE SET NULL
+	);
+	
+insert into Person select distinct personId, name, status, mentorId FROM AltPerson;
+insert into Team select distinct teamName, teamTime FROM AltPerson;
+insert into Person_Team select distinct personId, teamName, teamRole FROM AltPerson;
+
+select * from Person;
+select * from Team;
+select * from Person_Team;
