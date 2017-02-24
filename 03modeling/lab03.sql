@@ -1,8 +1,9 @@
--- Exercise 3.1 & 3.2 for lab 3.
+-- Exercise 3.3 for homework03.
 --
 -- CS 342, Spring, 2017
 -- kvlinden, baa8
 
+drop table Request;
 drop table Person_Team;
 drop table Team;
 drop table Person;
@@ -53,6 +54,17 @@ create table Person_Team (
 	FOREIGN KEY (personId) REFERENCES Person(ID) ON DELETE SET NULL,
 	FOREIGN KEY (teamId) REFERENCES Team(ID) ON DELETE SET NULL,
 	CHECK (endDate > startDate)
+	);	
+	
+create table Request(
+	requestDate TIMESTAMP,
+	householdID integer NOT NULL,
+	personID integer,
+	text varchar(500),
+	accessCode char(1),
+	reponse varchar(500),
+	FOREIGN KEY (householdId) REFERENCES HouseHold(ID) ON DELETE SET NULL,
+	FOREIGN KEY (personId) REFERENCES Person(ID) ON DELETE SET NULL
 	);
 
 INSERT INTO Household VALUES (0,'2347 Oxford Dr. SE','Grand Rapids','MI','49506','616-243-5680');
@@ -73,3 +85,7 @@ INSERT INTO Team VALUES (2, 'Planning Committee', 'He who fails to plan plans to
 INSERT INTO Person_Team VALUES (0, 0, 'Chairman', '01-Jan-2010', '02-Feb-2017');
 INSERT INTO Person_Team VALUES (0, 2, 'Secretary', '04-May-2012', '20-Jun-2016');
 INSERT INTO Person_Team VALUES (3, 1, 'Member', '13-Jul-2009', '23-Dec-2015');
+
+INSERT INTO Request VALUES (CURRENT_TIMESTAMP, 0, 1, 'Help', 'm', 'Ok');
+INSERT INTO Request VALUES (CURRENT_TIMESTAMP, 0, NULL, 'Help quickly!', NULL, NULL);
+
