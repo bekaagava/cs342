@@ -1,0 +1,18 @@
+Consider the ERD given in Figure 3.21 (The AIRLINE database schema):
+a. Based on what you see in the diagram, explain the difference between flights, flight legs, and leg instances.
+	
+	A flight can have multiple flight legs, whereas each flight leg can only belong to one flight. The same flight legs may
+	need to be carried out on multiple dates at different times. A flight leg has many leg instances which represent the particular occurrence of that flight leg on 
+	a particular date. A leg instance can only be linked back to one flight and flight leg. Leg instances have an identifying relationship that relates them to flight legs, 
+	while flight legs have an identifying relationship that relates them to flights.
+
+b. The names of some of the attributes in this diagram are underlined with dotted lines. You’ll note that this notation is not explained in the Figure 3.14 cheatsheet. What does it mean?
+	
+	Underlining the names of attributes with dotted lines means that these attributes are partial keys for the weak entity type in which they are contained.
+	The attributes underlined with dotted lines can uniquely identify weak entities that are related to the same owner entity
+
+c. You’ll note that the “SEAT” entity has a total participation in the “RESERVATION” relationship (i.e., we would write the cardinality constraint {1,*} on the “LEG_INSTANCE” side of the relationship). 
+Why do you think the database modelers did it this way?
+
+	I think the database modelers did it this way because a seat cannot exist outside a leg of a flight, otherwise there would be angry customers who have reserved seats
+	that are "outside" the flight leg instance they have booked tickets for. That should never be the case. All seats need to belong to a leg instance. 
