@@ -1,0 +1,53 @@
+Exercise 14.31
+
+BOOK (Book_title,Author_name,Book_type,List_price,Author_affil,Publisher)
+
+Functional Dependencies:
+
+Book_title -> Publisher,Book_type
+Book_type -> List_price
+Author_name -> Author_affil
+
+a. The normal form of the relation:
+
+The relation is in 1NF because the domain of the attributes include only atomic values and the value of any attribute in the tuple is a single value from the domain of that attribute. 
+
+Candidate keys:
+{Book_title, Author_name, Book_type} - (In the weird case that there are two books that have the same title, author name and book type because the authors happen to have the same name, this would not be a good candidate key. I am not sure if this is legally restricted, especially if the authors are in separate countries). 
+
+Since all the non-trivial functional dependencies have sub-keys instead of super keys on the left hand side, the relation is not in BCNF. 
+
+Since the relation is not in BCNF, then it cannot be in 4NF. 
+
+b. Normalized Relation:
+Book(ID, title, publisher, typeId) - the PK is ID and typeId is a FK 
+Author(ID, name, affiliation) - the PK is ID 
+Book_Author(bookId, authorId) - this exists for the case of coauthors
+Book_Type(ID, name, list_price) - the PK is ID
+
+
+
+Exercise 14.35
+
+Book(Book_Name, Author, Edition, Year)
+
+Functional Dependencies:
+{Book_name, edition} -> year 
+
+a. Candidate keys:
+{Book_name, Author, Edition}
+{Book_name, Author, Year}
+
+b. Justifying MVD:
+{Book} ->> {Author}|{Edition, Year}
+
+A book’s edition and copyright_year are independent of the author’s name thus each author’s name appears with each of the editions and copyright years for a book. Books multidetermine authors and books multidetermine the edition and the year so the multivalued dependency holds. 
+
+c. Relation Decomposition based on MVD:
+
+Book_Author(book_name, author)
+Book_EdYear(book_name, edition, year) - for each of the relations, all the attributes can serve as the candidate key for the relation. A surrogate key “bookId” can be introduced in both tables as the primary key and the fields would have to match for both tables so that they can be linked. 
+
+
+
+
