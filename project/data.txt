@@ -1,0 +1,109 @@
+- Data source
+The data was generated from the generate data website. In order to populate the tables with 36 records each, a lot of the data does not make sense in reality.
+For example, the recipes are not real, neither are there durations. The referential integrity holds for the schema, but in order to save time the references do 
+not necessarily make sense. This will be addressed in the Queries part of the project. Visit http://www-personal.umich.edu/~zrenner/fridge/index.htm for a better
+understanding of the project domain.
+
+- Identification and Justification of Normal Form
+The schema is in 4NF and by extension BCNF because it does not have undesirable multivalued dependencies. The nonadditive join property as well as the 
+functional dependency property hold for all the relations in the schema. 
+
+- Proof that schema satisfies BCNF and 4NF
+
+-- Fridge(ID, brand, model, street, city, state, zipcode)
+
+Functional Dependencies:
+{ID} -> (brand, model, street, city, state, zipcode)
+
+Candidate Key(s):
+{ID}
+
+This relation is in BCNF because there are no non-trivial FDs where the left hand side is not a superkey
+This relation is in 4NF because there are no non-trivial MVDs where the left hand side is not a superkey
+
+-- UserType(ID, name)
+
+Functional Dependencies:
+{ID} -> (name)
+
+Candidate Key(s):
+{ID}
+
+This relation is in BCNF because there are no non-trivial FDs where the left hand side is not a superkey
+This relation is in 4NF because there are no non-trivial MVDs where the left hand side is not a superkey
+
+-- Owner(ID, userName, password, firstName, lastName, phoneNumber, userTypeID, fridgeID)
+
+Functional Dependencies:
+{ID} -> (userName, password, firstName, lastName, phoneNumber, userTypeID, fridgeID)
+{userName} -> (ID, password, firstName, lastName, phoneNumber, userTypeID, fridgeID)
+
+Candidate Key(s):
+{ID}
+{userName}
+
+This relation is in BCNF because there are no non-trivial FDs where the left hand side is not a superkey
+This relation is in 4NF because there are no non-trivial MVDs where the left hand side is not a superkey
+
+-- Recipe(ID, name, description, durationUnit, durationNumber)
+
+Functional Dependencies:
+{ID} -> (name, description, durationUnit, durationNumber)
+
+Candidate Key(s):
+{ID}
+
+This relation is in BCNF because there are no non-trivial FDs where the left hand side is not a superkey
+This relation is in 4NF because there are no non-trivial MVDs where the left hand side is not a superkey
+
+-- Ingredient(ID, name)
+
+Functional Dependencies:
+{ID} -> (name)
+
+Candidate Key(s):
+{ID}
+
+This relation is in BCNF because there are no non-trivial FDs where the left hand side is not a superkey
+This relation is in 4NF because there are no non-trivial MVDs where the left hand side is not a superkey
+
+-- Stock(RFID, expirationDate, ingredientID, fridgeID)
+
+Functional Dependencies:
+{RFID} -> (expirationDate, ingredientID, fridgeID)
+
+Candidate Key(s):
+{RFID}
+
+This relation is in BCNF because there are no non-trivial FDs where the left hand side is not a superkey
+This relation is in 4NF because there are no non-trivial MVDs where the left hand side is not a superkey
+
+-- OwnerRecipe(ownerID, recipeID)
+
+There are no non-trivial FDs
+
+Candidate Key(s):
+{ownerID, recipeID}
+
+This relation is in BCNF because there are no non-trivial FDs where the left hand side is not a superkey
+This relation is in 4NF because there are no non-trivial MVDs where the left hand side is not a superkey
+
+-- RecipeIngredient(recipeID, ingredientID, unit, quantity)
+
+{recipeID, ingredientID} -> (unit, quantity)
+
+Candidate Key(s):
+{recipeID, ingredientID}
+
+This relation is in BCNF because there are no non-trivial FDs where the left hand side is not a superkey
+This relation is in 4NF because there are no non-trivial MVDs where the left hand side is not a superkey
+
+-- OwnerStock(ownerID, stockID)
+
+There are no non-trivial FDs
+
+Candidate Key(s):
+{ownerID, stockID}
+
+This relation is in BCNF because there are no non-trivial FDs where the left hand side is not a superkey
+This relation is in 4NF because there are no non-trivial MVDs where the left hand side is not a superkey
