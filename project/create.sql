@@ -1,7 +1,7 @@
 -- Create the RFID Fridge user and database. 
 -- See ../README.txt for details.
 
--- Create the user.
+-- Create the user. 
 DROP USER baa8 CASCADE;
 CREATE USER baa8 
 	IDENTIFIED BY seven
