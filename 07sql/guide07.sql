@@ -80,3 +80,30 @@ v. Views that are implemented via query modification vs materialization:
 
 */
 
+—- 2
+Formal languages for the relational model (Chapter 8, for Wednesday)
+
+—- a
+Relational Algebra (read Sections 8.1–8.3 & 8.5) — Write a simple query on the movies database using SELECT (σcondition), PROJECT (πfieldlist), RENAME (ρnewName) and JOIN (⋈condition) (see example queries 1 & 2 in Section 8.5).
+
+TEMP <- σstatus=‘costar’(Casting)
+PERFORMER_STATUS <- (TEMP ⋈ performerId=idPerformer)
+ρ(First_name, Last_name) <- πfirstName, lastName(PERFORMER_STATUS)
+
+—- b
+Tuple Relational Calculus (read Sections 8.6.1–8.6.3 & 8.6.8) — Write a simple query on the movies database using the tuple relational calculus queries (see example queries 0 & 1 in Section 8.6.4).
+
+{p.firstName, p.lastName | Performer(p) AND (∃c)(Casting(c)
+AND c.status=‘costar’AND c.performerId=p.id)}
+
+—- c
+Define the following terms):
+
+Existential (∃) and universal (∀) quantifiers (see Section 8.6.3).
+- Existential (∃) quantifiers - the statements within the scope are true for at least one tuple
+- universal (∀) quantifiers - every tuple in the universe of tuples must make the formula, F, TRUE to make the quantified formula TRUE
+
+Safe expressions (see Section 8.6.8).
+This is an expression in relational calculus that is guaranteed to yield a finite number of tuples as its result. 
+
+
