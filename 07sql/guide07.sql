@@ -78,7 +78,6 @@ v. Views that are implemented via query modification vs materialization:
 - Query modification involves modifying or transforming the view query (submitted by the user) into a query on the underlying base tables.
 - View materialization involves physically creating a temporary or permanent view table when the view is first queried or created and keeping that table on the assumption that other queries on the view will follow. 
 
-*/
 
 —- 2
 Formal languages for the relational model (Chapter 8, for Wednesday)
@@ -106,4 +105,4 @@ Existential (∃) and universal (∀) quantifiers (see Section 8.6.3).
 Safe expressions (see Section 8.6.8).
 This is an expression in relational calculus that is guaranteed to yield a finite number of tuples as its result. 
 
-
+*/
