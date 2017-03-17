@@ -1,0 +1,13 @@
+Exercise 7.3
+
+a. Relational Algebra
+Creating the "view":
+Birthday <- πfirstName, lastName, birthdate(Person)
+
+GENX <- σ(birthdate >= '01-JAN-1961' AND birthdate <= '31-DEC-1975')(Birthday)
+
+b. Relational Calculus
+Creating the "view":
+{p.firstName, p.lastname, p.birthdate | Person (p)}
+
+{p.firstName, p.lastName, p.birthdate | Person(p) AND p.birthdate >= '01-JAN-1961' AND p.birthdate <= '31-DEC-1975'}
