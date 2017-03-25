@@ -1,0 +1,55 @@
+1. Read Sections 10.1, 10.4.1 & 26.1.1–2:
+
+a. Name the three basic approaches to database programming.
+- Embedding database commands in a general-purpose programming language.
+- Using a library of database functions or classes.
+- Designing a brand-new language.
+
+b. Explain the concepts of:
+
+impedance mismatch - this refers to the problems that occur because of differences between the database model and the programming language model. For example, the data types of a programming language differing from the attribute data types that are available in the data model.
+
+stored procedures - database program modules that are stored and executed by the DBMS at the database server.
+
+triggers - these are procedures that specify actions that are automatically triggered by certain events.
+
+2. Read Server-Side Programming: PL/SQL and Java.. Focus on server-side programming, PL/SQL and triggers; skip the section on “Overview of Java in Oracle Database”.
+
+a. Compare and contrast:
+
+procedural vs non-procedural languages: 
+For nonprocedural languages such as SQL, the set of data to be operated on is specified, but not the operations to be performed or the manner in which they are to be carried out. Whereas in procedural language programs, most statement executions depend on previous or subsequent statements and on control structures, such as loops or conditional branches, that are not available in procedural languages like SQL.
+
+client-side vs server-side database programming:
+- client-side programming is used to embed SQL statements in applications written in procedural languages such as C, C++, or Java.
+- server-side programming is used to develop data logic that resides in the database.
+
+b. Explain why one would want to do server-side programming using PL/SQL:
+- The principal benefit of server-side programming is that functionality built into the database can be deployed anywhere. The database and not the application determines the best way to perform tasks on a given operating system. Also, subprograms increase scalability by centralizing application processing on the server, enabling clients to reuse code. Because subprogram calls are quick and efficient, a single call can start a compute-intensive stored subprogram, reducing network traffic.
+
+c. For each of the following code segments, identify the type of the database object and explain what it does.
+
+CREATE PROCEDURE limited_count (limit IN integer) AS
+BEGIN
+  FOR i IN 1..limit LOOP
+      dbms_output.put_line(i);
+  END LOOP;
+END;
+
+- This is an explicitly run stored subprogram. It prints out numbers from 1 to the limit given to it as an input. 
+
+BEGIN
+  dbms_output.put_line('Hello, PL/SQL!');
+END;
+
+- This is an anonymous block. It prints out “Hello, PL/SQL” to the screen or flat file. 
+ 
+
+CREATE TRIGGER log_trigger
+  BEFORE INSERT OR UPDATE OF lastName ON Person
+  FOR each row
+BEGIN
+  dbms_output.put_line('Hello, name change!');
+END;
+
+- This is an implicitly run named program unit. It prints out “Hello, name change!” before inserting or updating the last name of a person. 
