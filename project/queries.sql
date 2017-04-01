@@ -25,8 +25,6 @@ CREATE MATERIALIZED VIEW Recipes
 		JOIN Ingredient i ON ri.ingredientID = i.ID AND i.kind = 'food'
 	);
 
-SELECT * FROM Recipes;
-
 /*
 Significant Query #1
 - Function: Returns the number of users of the refrigerator app, categorized by the type of user
