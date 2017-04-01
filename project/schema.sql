@@ -37,7 +37,8 @@ create table Recipe(
 	
 create table Ingredient(
 	ID integer PRIMARY KEY,
-	name varchar (20) NOT NULL
+	name varchar (20) NOT NULL,
+	kind varchar (15) NOT NULL
 	);
 	
 create table Stock(
