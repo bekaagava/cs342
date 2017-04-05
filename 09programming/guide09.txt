@@ -1,0 +1,56 @@
+Chapter 17
+
+B+ Trees — Focus on the Section 17.3 (skipping the material on algorithms).
+
+- Compare and contrast B-trees and B+-trees.
+B-trees and B+ - trees are both search trees, and a B+ -tree is a variation of a B-tree. 
+In B-trees, pointers to the data blocks are stored in both internal nodes and leaf nodes, whereas in B+ -trees, pointers to the data blocks of a file are stored only in leaf nodes, which might lead to fewer levels of higher-capacity indexes. 
+
+- Explain what it means for such a tree to be balanced.
+A tree is balanced when all of its leaf nodes are at the same level. 
+
+- Compare and contrast tree and data pointers.
+A tree pointer is a pointer to another node in the tree, whereas a data pointer is a pointer to the record with the search key field value or to the data file block containing that record.
+
+- Explain the nature of multiple-attribute indexes (see the introduction to Section 17.4).
+Multiple-attribute indexes are primary or secondary keys on which files are accessed that are a combination of attributes used frequently.
+
+- Explain the nature of hash and bitmap indexes (see Sections 17.5.1–2).
+The hash index is a secondary structure to access the file by using hashing on a search key other than the one used for the primary data file organization.
+The bitmap index is a data structure that facilitates querying on multiple keys. An index is created for one or more columns and each value or value range in those columns is indexed. 
+
+Physical Database Design — Focus on the Section 17.7.
+- Explain the concept of physical database design (PDD).
+Physical database design involves structuring data in storage in a way that guarantees good performance. It requires knowledge of the mix of queries, transactions, and applications that are expected to run on the database.
+
+- Compare and contrast the uses for B-tree, hash and bitmap indexes in PDD.
+B-trees support both equality and range queries on the attribute used as the search key, while hash indexes work well with equality conditions, particularly during joins to find a matching record(s), but they don’t support range queries. Bitmap indexing might be used for relations that contain a large number of rows.
+
+- Explain whether denormalization should be considered a form of PDD.
+Since denormalization is used to increase the performance of a previously normalized database, yes it should be considered a form of physical database design. It is at the physical database design stage that we consider the need to introduce controlled redundancy, which is denormalization.
+
+Chapter 18
+
+- Explain the concept of query optimization (see the introduction to the chapter).
+Query optimization is the process for choosing a suitable execution strategy for processing a query.
+
+Oracle’s EXPLAIN PLAN
+
+Load the small version of the Internet Movie DB defined in the repo (cs342/databases/imdb), configure the auto-trace facility in SQL*Plus (SET SERVEROUTPUT ON; & SET AUTOTRACE ON;) and generate an execuation plan for some simple query. What is the execution plan operation used and what does that operation do?
+
+SELECT COUNT(*) FROM Movie;
+SELECT * FROM table(dbms_xplan.display_cursor);
+
+The execution plan operation used is the “TABLE ACCESS FULL” and it reads the entire table as stored on the disk
+
+- Explain at least the following operations (see Oracle Execution Plan Operations).
+
+TABLE ACCESS FULL - This is also know as full table scan. It reads the entire table as stored on the disk. 
+
+TABLE ACCESS BY INDEX - This is done by index ROWID. It retrieves a row from the table using the ROWID retrieved from the preceding index lookup. 
+
+NESTED LOOPS - This joins two tables by fetching the result from one table and querying the other table for each row from the first. Nested selects can be used to implement the nested loops algorithm. 
+
+HASH JOIN - This loads the candidate records from one side of the join into a hash table that is probed for each row from the other side of the join. 
+
+INDEX UNIQUE SCAN - This performs the B-tree traversal only. The database uses this operation if a unique constraint ensures that the search criteria will match no more than one entry. 
