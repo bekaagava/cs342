@@ -1,0 +1,54 @@
+1. Sections 20.1-20.4.1 & 20.6 — Explain the following.
+
+interleaving vs. parallelism
+
+- interleaving: multiprogramming operating systems execute some commands from one process, then suspend that process and execute some commands from the next process, and so on. A process is resumed at the point where it was suspended whenever it gets its turn to use the CPU again.
+
+- parallelism: processes are executed simultaneously on different processors attached to the CPU.
+
+the lost update and dirty read problems
+
+- the lost update problem: this occurs when two transactions that access the same database items have their operations interleaved in a way that makes the value of some database items incorrect.
+
+- the dirty read problem: this is also known as the temporary update problem. It occurs when one transaction updates a database item and then the transaction fails for some reason. Meanwhile, the updated item is accessed by another transaction before it is changed back (or rolled back) to its original value. 
+
+transactions, including commits and rollbacks
+- A transaction is an atomic unit of work that should either be completed in its entirety or not done at all. 
+
+- commit_transaction: this signals a successful end of the transaction so that any changes (updates) executed by the transaction can be safely committed to the database and will not be undone. 
+
+- rollback (abort): this signals that the transaction has ended unsuccessfully, so that any changes or effects that the transaction may have applied to the database must be undone.
+
+the ACID properties:
+- The atomicity property: this requires that a transaction is executed to completion. 
+
+- The preservation of consistency: a consistent state of the database satisfies the constraints specified in the schema as well as any other constraints on the database that should hold. A database should be written in a way that guarantees that if the database is in a consistent state before executing the transaction, it will be in a consistent state after the complete execution of the transaction, assuming that no interference with other transactions occurs.
+
+- The isolation property: this is enforced by the concurrency control subsystem of the DBMS. If every transaction does not make its updates (write operations) visible to other transactions until it is committed, one form of isolation is enforced that solves the temporary update problem and eliminates cascading rollbacks, but does not eliminate all other problems. 
+
+- The durability property: this is the responsibility of the recovery subsystem of the DBMS. 
+
+schedule
+- A schedule, also known as a history, of transactions is an ordering of the operations of the transactions. Operations from different transactions can be interleaved in the schedule.  
+
+2. Chapter 21 introduction and Section 21.1 — Explain the following.
+
+- lock: this is a variable associated with a data item that describes the status of the item with respect to possible operations that can be applied to it. They are used as a means of synchronizing the access by concurrent transactions to the database items.
+
+- two-phase locking: this set of protocols employs the technique of locking data items to prevent multiple transactions from accessing items concurrently. 
+
+3. Review Oracle’s Overview of Transaction Processing in PL/SQL (only; you can skip the other sections on this page) — Compare and contrast the following.
+
+SAVEPOINT, COMMIT vs ROLLBACK [TO]
+- These are all commands to control transactions. 
+- COMMIT makes permanent any database changes made during the current transaction.
+- ROLLBACK ends the current transaction and undoes any changes made since the transaction began. 
+- SAVEPOINT marks the current point in the processing of a transaction.
+- SAVEPOINT, when used with ROLLBACK undoes part of a transaction.
+
+
+LOCK TABLE vs. FOR UPDATE
+- These are both used for locking.
+- The LOCK TABLE statement is used to lock the entire database tables in a specified lock mode so that the user can share or deny access to them.
+- The FOR UPDATE, on the other hand, is used to lock specific rows of a table to make sure they do not change after the user has read them. 
+
