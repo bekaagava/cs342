@@ -1,0 +1,21 @@
+10.2.a
+a. The Lost Update Problem
+SQL> set autocommit on;
+-- Second read
+2. SQL> select rank from Movie where id = 238072;
+
+      RANK
+----------
+       7.5
+-- Second update (overwrites the first update to the table)
+4. SQL> update Movie set rank=9 where id = 238072;
+
+1 row updated.
+
+Commit complete.
+-- The rank is updated to the value specified in the second update
+6. SQL> select rank from Movie where id = 238072;
+
+      RANK
+----------
+         9

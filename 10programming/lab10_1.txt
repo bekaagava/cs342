@@ -1,0 +1,26 @@
+-- Exercise 10.1
+
+- With regards to the parallel schedules, Session 2 is never updated with the changes made to 
+Session 1 until the commit statement is run. 
+
+- Making changes and then exiting and restarting the session is similar to committing after making 
+changes. Rollback does not work for the changes that were made before exiting the session, and 
+the changes are reflected in both Session 1 and 2 since a commit occurred with the exit
+
+
+a. Oracle seems to handle the transaction life-cycle with starting and stopping the 
+SQL*Plus sessions. When the session is stopped, the changes that were partially committed 
+become committed. When the session is started, the changes that were made to the database 
+are still present. 
+
+b. The ACID properties cannot be fully implemented using just START-TRANSACTION/SAVEPOINT/ROLLBACK/COMMIT. 
+This is proven by the existence of locking mechanisms. 
+However, with these commands, we can ensure that a transaction is consistency preserving by 
+being able to start the transaction and then commit it if it brings te database to a consistent state, or roll it back if it does not.
+With regards to atomicity, the commands alone do not present a way for transactions to be performed in their entirety. Locking mechanisms 
+are needed for this.
+For isolation, these commands alone cannot not be used to implement isolation, because once a commit is made for 
+one transaction, it could affect the other transactions running concurrently. 
+For durability, savepoint could be used to mark a point in a transaction that might be recoverable in the event of a crash, and then when the 
+system is restored, that point could be recovered and then committed. 
+

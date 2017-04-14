@@ -1,0 +1,20 @@
+-- Exercise 10.3.a
+3. SQL> select rank from Movie where id = 238072;
+
+      RANK
+----------
+         9
+-- This session is unable to to see the changes that have been made to the table, and 
+it is also unable to update the table because it is locked.		 
+5. SQL> select rank from Movie where id = 238072;
+
+      RANK
+----------
+         9
+-- The lock has been released so this table can see the update and also lock the 
+table and make its own update. 		 
+7. SQL> select rank from Movie where id = 238072;
+
+      RANK
+----------
+        10

@@ -1,0 +1,21 @@
+-- Exercise 10.2.a
+a. The Lost Update Problem 
+SQL> set autocommit on;
+-- First read
+1. SQL> select rank from Movie where id = 238072;
+
+      RANK
+----------
+       7.5
+-- Frist update (this is the lost update)
+3. SQL> update Movie set rank=8 where id = 238072;
+
+1 row updated.
+
+Commit complete.
+-- The update to the rank is lost
+5. SQL> select rank from Movie where id = 238072;
+
+      RANK
+----------
+         9
