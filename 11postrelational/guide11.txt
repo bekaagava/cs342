@@ -1,0 +1,52 @@
+1. Read Your First Cup: An Introduction to the Java EE Platform — Focus on Chapter 2, “Understanding Java Platform, Enterprise Edition”
+
+Explain the tiers discussed in the article. On which does J2EE focus? On which to the Oracle database focus?
+
+- The Client Tier: This consists of application clients (such as a web browser, a standalone application or other servers) that access a Java EE server and that are usually located on a different machine from the server. Various types of applications can be Java EE clients, and they are not always Java applications.
+
+- The Web Tier: This consists of components that handle the interaction between clients and the business tier.
+
+- The Business Tier: This consists of components that provide the business logic for an application. The core functionality exists in the business tier components in a properly designed enterprise application.
+
+- The Enterprise Information Systems Tier: This consists of database servers, enterprise resource planning systems, and other legacy data sources, such as mainframes. They are typically located on a separate machine from the Java EE server, and are accessed by components on the business tier.
+
+
+- J2EE focuses on the middle tier (the web tier and the business tier) to make enterprise application management easier. 
+
+- The oracle database focuses on the enterprise information systems tier.
+
+
+Explain the nature of a J2EE container. What sort of containers are there?
+
+- J2EE containers are the interface between the component and the lower-level functionality provided by the platform too support that component. The functionality of the container is platform defined, and different for each component type. 
+
+- There are:
+   - Web container: the interface between web components and the web server.
+   - Enterprise JavaBeans (EJB) container: the interface between enterprise beans.
+   - Application Client Container: the interface between Java EE application clients and the Java EE server.
+
+2. Read The Java EE Tutorial — This tutorial provides extensive material on J2EE; focus on the sections listed here.
+
+Sections 1.7–1.8, “Java EE 7 APIs” — Explain the purpose of these technologies (only): 
+
+- JPA: The Java Persistence API (JPA) is a Java standards-based solution for persistence.
+- JTA: The Java Transaction API (JTA) provides a standard interface for demarcating transactions.
+- JAX-RS: The Java API for RESTful Web Services (JAX-RS) defines APIs for the development of web services built according to the Representational State Transfer (REST) architectural style. 
+- JDBC: The Java Database Connectivity API (JDBC) allows the invocation of SQL commands from Java programming language methods.
+- JAXB: The Java Architecture for XML Binding (JAXB) provides a convenient way to bind an XML schema to a representation in Java language programs.
+
+
+Section 5, “Packaging Applications” — Compare and contrast JARs, WARs & EARs.
+- JAR (Java Archive), WAR (Web Archive) and EAR (Enterprise Archive) files are all standard JAR files except that WAR and EAR files have the .war or the .ear extension, respectively. AN EAR file contains Java EE modules and optionally, deployment descriptors. EJB modules are packaged as JAR files with a .jar extension, whereas web modules are packaged as JAR files with a .war extension, and application client modules are packaged as JAR files with a .jar extension.
+
+3. Review these tutorials, on which the lab is based: Developing a Java EE Application & Creating and Running Your First RESTful Web Service.
+
+Identify the IDE we’ll use for J2EE development.
+-The IDE we will use for J2EE development is the IntelliJ IDEA.
+
+Identify the roles of the following technologies in the J2EE application: 
+- J2SE’s JDK: provides tools for developing, debugging, and monitoring Java applications.
+- GlassFish: this is used as an application server.
+
+Explain the nature of a RESTful webservice.*
+- A RESTful webservice is built to work best on the Web. Representational State Transfer (REST) is an architectural style that specifies constraints, such as the uniform interface, that if applied to a web service induce desirable properties, such as performance, scalability, and modifiability, that enable services to work best on the Web. 
