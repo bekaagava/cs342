@@ -22,7 +22,7 @@ IS
 	SELECT street, city, state, zipcode
 	FROM Fridge
 	WHERE id = fridgeIdIn
-	FOR UPDATE;
+	FOR UPDATE; 
 
 v1 Fridge.street%type;
 v2 Fridge.city%type;
