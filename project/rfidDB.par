@@ -1,0 +1,4 @@
+DIRECTORY=exp_dir
+DUMPFILE=rfidDB.dmp 
+LOGFILE=rfidDB.log
+TABLES=rfidDB.fridge,rfidDB.usertype,rfidDB.owner,rfidDB.recipe,rfidDB.ingredient,rfidDB.stock,rfidDB.ownerrecipe,rfidDB.recipeingredient,rfidDB.ownerstock

@@ -2,8 +2,8 @@
 -- See ../README.txt for details.
 
 -- Create the user. 
-DROP USER baa8 CASCADE;
-CREATE USER baa8 
+DROP USER rfidDB CASCADE;
+CREATE USER rfidDB
 	IDENTIFIED BY seven
 	QUOTA 5M ON System;
 GRANT 
@@ -14,13 +14,25 @@ GRANT
 	CREATE VIEW,
 	CREATE MATERIALIZED VIEW,
 	CREATE PROCEDURE,
-	CREATE TRIGGER,
+	CREATE TRIGGER,	
 	UNLIMITED TABLESPACE
-	TO baa8;
+	TO rfidDB;
 
 -- Connect to the user's account/schema.
-CONNECT baa8/seven;
+CONNECT rfidDB/seven;
+
+-- Set up the Oracle directory for the dump database feature.
+-- Use Oracle directories for input/output files to avoid permissions problems. (?)
+-- This is needed both to create and to load the *.dmp files.
+
+DROP DIRECTORY exp_dir;
+CREATE DIRECTORY exp_dir AS 'C:\Users\baa8\Documents\project';
+GRANT READ, WRITE ON DIRECTORY exp_dir TO rfidDB;
+
+-- Load the database from the dump file using:
+--impdp rfidDB/seven parfile=rfidDB.par
 
 -- Create the database.
-DEFINE baa8=S:\cs342\project
-@&baa8\load
+DEFINE rfidDB=C:\Users\baa8\Documents\project
+@&rfidDB\load
+

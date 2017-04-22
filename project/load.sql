@@ -2,11 +2,11 @@
 -- See ../README.md for details.
 
 -- Drop the previous table declarations.
-@&baa8\drop         
+@&rfidDB\drop         
 commit;
 -- Reload the table declarations.
-@&baa8\schema
+@&rfidDB\schema
 commit;
 -- Load the table data.
-@&baa8\data
+@&rfidDB\data
 commit;
