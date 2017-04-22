@@ -1,0 +1,134 @@
+-- Query optimizations for the RFID Database
+-- 04/21/2017
+
+
+- Copy of the Query 
+/*
+Significant Query #5
+- Function: Returns the owners of the items in the fridge with ID = 119
+- User: The users of the fridge can find out who owns an item in the fridge, and records with matching RFIDs indicate
+		that the item is being shared amongst those users.
+- Demostrates ability to use self-join using tuple variables and join of at least four tables 
+- I could have designed this query using the "WHERE" clause for the join instead of the "JOIN" clause but I chose the "JOIN"
+  for better readability.
+*/
+SELECT o.firstName|| ' ' || o.lastName fullName, s.RFID Item_RFID, i.name Item_Name
+FROM OwnerStock os
+JOIN OwnerStock os1 ON os.ownerID = os1.ownerID AND os.stockID = os1.stockID
+JOIN Owner o ON os.ownerID = o.ID
+JOIN Stock s ON os.stockID = s.RFID
+JOIN Ingredient i ON s.ingredientID = i.ID
+WHERE s.fridgeID = 119
+ORDER BY Item_RFID;
+
+- Execution Plan of the Query before Optimization
+
+Elapsed: 00:00:00.01
+
+Execution Plan
+----------------------------------------------------------
+Plan hash value: 4281374356
+
+--------------------------------------------------------------------------------
+| Id  | Operation              | Name       | Rows  | Bytes | Cost (%CPU)| Time
+--------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT       |            |    13 |  1989 |    13  (24)| 00:00
+|   1 |  SORT ORDER BY         |            |    13 |  1989 |    13  (24)| 00:00
+|*  2 |   HASH JOIN            |            |    13 |  1989 |    12  (17)| 00:00
+|*  3 |    HASH JOIN           |            |    13 |  1651 |    10  (20)| 00:00
+|*  4 |     HASH JOIN          |            |    13 |  1170 |     7  (15)| 00:00
+|*  5 |      HASH JOIN         |            |    11 |   704 |     5  (20)| 00:00
+|*  6 |       TABLE ACCESS FULL| STOCK      |    11 |   429 |     2   (0)| 00:00
+|   7 |       TABLE ACCESS FULL| INGREDIENT |    36 |   900 |     2   (0)| 00:00
+|   8 |      TABLE ACCESS FULL | OWNERSTOCK |    71 |  1846 |     2   (0)| 00:00
+|   9 |     TABLE ACCESS FULL  | OWNER      |    36 |  1332 |     2   (0)| 00:00
+|  10 |    TABLE ACCESS FULL   | OWNERSTOCK |    71 |  1846 |     2   (0)| 00:00
+--------------------------------------------------------------------------------
+
+- Query Optimizations 
+
+CREATE INDEX ownerStockIndex
+ON OwnerStock(ownerID, stockID);
+
+CREATE INDEX stockIndex
+ON Stock (fridgeID, RFID, ingredientID);
+
+CREATE INDEX ingredientIndex 
+ON Ingredient(id, name);
+
+CREATE INDEX ownerIndex 
+ON Owner(id, firstName, lastName);
+
+SELECT o.firstName|| ' ' || o.lastName fullName, s.RFID Item_RFID, i.name Item_Name
+FROM Owner o
+JOIN OwnerStock os ON o.ID = os.ownerID
+JOIN OwnerStock os1 ON os.ownerID = os1.ownerID AND os.stockID = os1.stockID
+JOIN Stock s ON os.stockID = s.RFID
+JOIN Ingredient i ON s.ingredientID = i.ID
+WHERE s.fridgeID = 119
+ORDER BY Item_RFID;
+
+DROP INDEX ownerStockIndex;
+
+DROP INDEX ingredientIndex ;
+
+DROP INDEX ownerIndex;
+
+DROP INDEX stockIndex;
+
+
+- Execution Plan of the Query After Optimization
+
+
+Elapsed: 00:00:00.01
+
+Execution Plan
+----------------------------------------------------------
+Plan hash value: 2102952901
+
+----------------------------------------------------------------------------------------
+
+| Id  | Operation            | Name            | Rows  | Bytes | Cost (%CPU)| Time     |
+
+----------------------------------------------------------------------------------------
+
+|   0 | SELECT STATEMENT     |                 |    13 |  1989 |     7  (43)| 00:00:01 |
+
+|   1 |  SORT ORDER BY       |                 |    13 |  1989 |     7  (43)| 00:00:01 |
+
+|   2 |   NESTED LOOPS       |                 |    13 |  1989 |     6  (34)| 00:00:01 |
+
+|*  3 |    HASH JOIN         |                 |    13 |  1651 |     6  (34)| 00:00:01 |
+
+|*  4 |     HASH JOIN        |                 |    13 |  1170 |     4  (25)| 00:00:01 |
+
+|*  5 |      HASH JOIN       |                 |    11 |   704 |     3  (34)| 00:00:01 |
+
+|*  6 |       INDEX FULL SCAN| STOCKINDEX      |    11 |   429 |     1   (0)| 00:00:01 |
+
+|   7 |       INDEX FULL SCAN| INGREDIENTINDEX |    36 |   900 |     1   (0)| 00:00:01 |
+
+|   8 |      INDEX FULL SCAN | OWNERSTOCKINDEX |    71 |  1846 |     1   (0)| 00:00:01 |
+
+|   9 |     INDEX FULL SCAN  | OWNERINDEX      |    36 |  1332 |     1   (0)| 00:00:01 |
+
+|* 10 |    INDEX RANGE SCAN  | OWNERSTOCKINDEX |     1 |    26 |     0   (0)| 00:00:01 |
+
+----------------------------------------------------------------------------------------
+
+- The OwnerStockIndex changes the operations on the OwnerStock table from a TABLE ACCESS 
+FULL, which is costly because it searches the entire table, to INDEX FULL SCAN and INDEX RANGE SCAN.
+Since a composite index has been created with the ownerID and stockID, it only reads the entire index 
+for the INDEX FULL SCAN. With the INDEX RANGE SCAN, it accesses one row as compared to 71 in
+the unoptimized query. 
+
+- The stockIndex changes the operation on the Stock table from a TABLE ACCESS FULL to 
+and INDEX FULL SCAN, which reads only the entire index for the table, as compared to the full rows
+and columns for the table. The composite index on the RFID, frigeID, and then name is based 
+on the reasoning that RFID and name is being selected by the query, and there is a fridgeID specified by the query.
+
+- The OWNERINDEX and the INGREDIENTINDEX both replace the TABLE ACCESS FULLs operations
+on their respective tables with INDEX FULL SCANs. They are both composite indexes on the 
+ids of the tables, and the columns that are being selected by the query.
+
+- I tried restructuring my joins, but that had no effect on the execution plan of the query. 
