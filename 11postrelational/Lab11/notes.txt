@@ -1,0 +1,43 @@
+Exercise 11.1
+c. Exploring the project structure — How do the external libraries (in the project pane) relate to J2SE and J2EE?
+J2SE would consist of only the JDK external library. J2EE on the other hand, would consist 
+of the JDK as well as the application server, Glassfish. 
+
+d. Developing source code — Set the HTML title and body content to whatever you’d like. At what tier does this application run?
+
+- The application is JSP (JavaServer Page), so it runs at the web tier.
+
+e. Running the application &
+Modifying the code and observing the changes — What server does this step use to serve up your application? For a 
+hint, look at what’s served up at the URL: /. How does it compare with a typical web server?
+
+- The step uses the local server, Glassfish, which is an application server. A typical web server does not 
+serve up J2EE, whereas this one does. 
+
+f. Exploring a run configuration &
+Exploring an artifact configuration — Skim through these sections, making sure that you can 
+find the application features they discuss. What is a WAR file?
+
+- A WAR (web application archive) file is a JAR (Java Archive) file used to distribute resources that constitute a web application,
+such as our JavaServer page, index.jsp.
+
+g. You should now have a GlassFish server running to which Intellij can (“remotely”) deploy your WAR.
+What’s the difference between “exploded” and non-exploded WAR files?
+
+- Exploded WAR files, unlike non-exploded WAR files, do not have to be manually redeployed to the application server everytime changes are made.
+For exploded WAR files, the application server is pointed at a folder containing the unzipped (exploded) 
+contents of what would be inside WAR files. Non-exploded WAR files have to be deployed to the application
+server to test the application.
+
+h. Packaging the application into an EAR: Using Java EE Application support & 
+Looking at other features (tool windows and facets) — Skim these sections but don’t implement them. 
+Compare and contrast EAR and WAR artifacts.
+
+- A WAR is a module that gets loaded into a web container of a Java Application Server. A web conatiner requires
+the web module to be packaged as a WAR file. Enterprise applications are packaged as 
+EAR files, and the may consist of one or more modules that can either be web modules (packaged as a WAR file) 
+or EJB modules (packaged as a JAR file) or both. 
+
+Exercise 11.2
+b. What library does this application use for REST support?
+- The application uses the javax.ws.rs library for REST support. 
