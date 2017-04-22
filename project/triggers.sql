@@ -37,7 +37,7 @@ DECLARE
 counter INTEGER;
 invalid_exception EXCEPTION;
 
-BEGIN
+BEGIN 
 	
 	SELECT COUNT(*) INTO counter
 	FROM Stock s, Owner o
