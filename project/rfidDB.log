@@ -1,22 +1,27 @@
 ;;; 
-Import: Release 11.2.0.2.0 - Production on Sat Apr 22 17:32:47 2017
+Export: Release 11.2.0.2.0 - Production on Sat Apr 22 17:38:03 2017
 
 Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
 ;;; 
 Connected to: Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
-Master table "RFIDDB"."SYS_IMPORT_TABLE_01" successfully loaded/unloaded
-Starting "RFIDDB"."SYS_IMPORT_TABLE_01":  rfidDB/******** parfile=rfidDB.par 
-Processing object type TABLE_EXPORT/TABLE/TABLE
-ORA-39151: Table "RFIDDB"."FRIDGE" exists. All dependent metadata and data will be skipped due to table_exists_action of skip
-ORA-39151: Table "RFIDDB"."USERTYPE" exists. All dependent metadata and data will be skipped due to table_exists_action of skip
-ORA-39151: Table "RFIDDB"."OWNER" exists. All dependent metadata and data will be skipped due to table_exists_action of skip
-ORA-39151: Table "RFIDDB"."RECIPE" exists. All dependent metadata and data will be skipped due to table_exists_action of skip
-ORA-39151: Table "RFIDDB"."INGREDIENT" exists. All dependent metadata and data will be skipped due to table_exists_action of skip
-ORA-39151: Table "RFIDDB"."STOCK" exists. All dependent metadata and data will be skipped due to table_exists_action of skip
-ORA-39151: Table "RFIDDB"."OWNERRECIPE" exists. All dependent metadata and data will be skipped due to table_exists_action of skip
-ORA-39151: Table "RFIDDB"."RECIPEINGREDIENT" exists. All dependent metadata and data will be skipped due to table_exists_action of skip
-ORA-39151: Table "RFIDDB"."OWNERSTOCK" exists. All dependent metadata and data will be skipped due to table_exists_action of skip
+Starting "RFIDDB"."SYS_EXPORT_TABLE_01":  rfidDB/******** parfile=rfidDB.par 
+Estimate in progress using BLOCKS method...
 Processing object type TABLE_EXPORT/TABLE/TABLE_DATA
+Total estimation using BLOCKS method: 576 KB
+Processing object type TABLE_EXPORT/TABLE/TABLE
 Processing object type TABLE_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
 Processing object type TABLE_EXPORT/TABLE/CONSTRAINT/REF_CONSTRAINT
-Job "RFIDDB"."SYS_IMPORT_TABLE_01" completed with 9 error(s) at 17:32:48
+. . exported "RFIDDB"."FRIDGE"                           8.859 KB      20 rows
+. . exported "RFIDDB"."INGREDIENT"                       6.617 KB      36 rows
+. . exported "RFIDDB"."OWNER"                            10.87 KB      36 rows
+. . exported "RFIDDB"."OWNERRECIPE"                      5.859 KB      36 rows
+. . exported "RFIDDB"."OWNERSTOCK"                       6.257 KB      70 rows
+. . exported "RFIDDB"."RECIPE"                           15.90 KB      36 rows
+. . exported "RFIDDB"."RECIPEINGREDIENT"                 7.007 KB      36 rows
+. . exported "RFIDDB"."STOCK"                            7.695 KB      62 rows
+. . exported "RFIDDB"."USERTYPE"                         5.460 KB       3 rows
+Master table "RFIDDB"."SYS_EXPORT_TABLE_01" successfully loaded/unloaded
+******************************************************************************
+Dump file set for RFIDDB.SYS_EXPORT_TABLE_01 is:
+  C:\USERS\BAA8\DOCUMENTS\PROJECT\RFIDDB.DMP
+Job "RFIDDB"."SYS_EXPORT_TABLE_01" successfully completed at 17:38:07
