@@ -17,12 +17,26 @@ CREATE OR REPLACE PROCEDURE  multiStepTransact(fridgeIdIn IN Fridge.id%type, str
 cityIn IN Fridge.city%type, stateIn IN Fridge.state%type, zipcodeIn IN Fridge.zipcode%type)
 AS
 
+Cursor c1 
+IS
+	SELECT street, city, state, zipcode
+	FROM Fridge
+	WHERE id = fridgeIdIn
+	FOR UPDATE;
+
+v1 Fridge.street%type;
+v2 Fridge.city%type;
+v3 Fridge.state%type;
+v4 Fridge.zipcode%type;
+
 incorrectStreet_exception EXCEPTION;
 incorrectCity_exception EXCEPTION;
 incorrectState_exception EXCEPTION;
 incorrectZipcode_exception EXCEPTION;
 
 BEGIN
+
+	SAVEPOINT startpoint;
 -- Throw an exception if the input does not contain the full new address for the fridge
 	IF streetIn IS NULL THEN
 		RAISE incorrectStreet_exception;
@@ -33,39 +47,42 @@ BEGIN
 	ELSIF zipcodeIn IS NULL THEN
 		RAISE incorrectZipcode_exception;
 	END IF;
-
+	
 -- The Row Exclusive Table Lock is issued automatically against the Fridge Table when 
--- the update statements are issued against the table. So it ensures isolation.
+-- the a single update statement is issued against the table. In order to ensure isolation for 
+-- the multiple update statements, this row share table lock is applied so that the updates are done one 
+-- at a time and if something goes wrong, everything is rolled back to before any of the update statements.
 
-	UPDATE Fridge
-	SET street = streetIn
-	WHERE Fridge.id = fridgeIdIn;
+	OPEN c1;
 	
-	UPDATE Fridge
-	SET city = cityIn
-	WHERE Fridge.id = fridgeIdIn;
+	LOOP
+		FETCH c1 into v1, v2, v3, v4;
+		EXIT WHEN c1%NOTFOUND;
+		UPDATE Fridge SET street = streetIn WHERE CURRENT OF c1;
+		UPDATE Fridge SET city = cityIn WHERE CURRENT OF c1;
+		UPDATE Fridge SET state = stateIn WHERE CURRENT OF c1;
+		UPDATE Fridge SET zipcode = zipcodeIn WHERE CURRENT OF c1;
+	END LOOP;
 	
-	UPDATE Fridge
-	SET state = stateIn
-	WHERE Fridge.id = fridgeIdIn;
-	
-	UPDATE Fridge
-	SET zipcode = zipcodeIn
-	WHERE Fridge.id = fridgeIdIn;
-	
--- Commiting at the end and using these exceptions ensures the atomicity of this transaction, because we only want to
--- commit the updates after the entire new address info has been updated
+	CLOSE c1;
+
 	COMMIT;	
 EXCEPTION
 	WHEN incorrectStreet_exception THEN
-	RAISE_APPLICATION_ERROR(-20001, 'Please provide a non-NULL and accurate value for the street');
+		RAISE_APPLICATION_ERROR(-20001, 'Please provide a non-NULL and accurate value for the street');
+		ROLLBACK TO startpoint;
+	
 	WHEN incorrectCity_exception THEN
-	RAISE_APPLICATION_ERROR(-20002, 'Please provide a non-NULL and accurate value for the city');
+		RAISE_APPLICATION_ERROR(-20002, 'Please provide a non-NULL and accurate value for the city');
+		ROLLBACK TO startpoint;
+	
 	WHEN incorrectState_exception THEN
-	RAISE_APPLICATION_ERROR(-20003, 'Please provide a non-NULL and accurate value for the state');
+		RAISE_APPLICATION_ERROR(-20003, 'Please provide a non-NULL and accurate value for the state');
+		ROLLBACK TO startpoint;
+	
 	WHEN incorrectZipcode_exception THEN
-	RAISE_APPLICATION_ERROR(-20004, 'Please provide a non-NULL and accurate value for the zipcode');
-
+		RAISE_APPLICATION_ERROR(-20004, 'Please provide a non-NULL and accurate value for the zipcode');
+		ROLLBACK TO startpoint;
 END;
 /
 
