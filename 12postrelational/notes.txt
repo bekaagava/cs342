@@ -1,0 +1,10 @@
+Exercise 12.1
+
+1. Compare and contrast the database connection you built in Guide 12 (in Intellij IDEA) and this database connection (in GlassFish).
+ Do we need both? If so, explain why; if not, explain why not.
+ 
+The database connection built in Guide 12 is a JDBC connection between the Oracle CPDB database and the IntelliJ IDE.
+The database connection for this lab is a connection between Glassfish and the oracle CPDB database. Since these connections are
+for connecting different parts to the database, they are both needed.
+
+Exercise 12.2
