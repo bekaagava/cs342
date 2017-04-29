@@ -1,0 +1,36 @@
+Exercise 12.1
+
+1. Compare and contrast the database connection you built in Guide 12 (in Intellij IDEA) and this database connection (in GlassFish).
+ Do we need both? If so, explain why; if not, explain why not.
+ 
+The database connection built in Guide 12 is a JDBC connection between the Oracle CPDB database and the IntelliJ IDE.
+The database connection for this lab is a connection between Glassfish and the oracle CPDB database. Since these connections are
+for connecting different parts to the database, they are both needed.
+
+Exercise 12.2
+1. How does Intellij map the database tables into Java entity classes?
+IntelliJ maps the database tables into Java entity classes using the Java Persistence API (JPA)
+to generate the managed entity classes and O/R mapping from the imported database schema.
+
+2. What does the PK class do?
+The PK class defines and checks the correctness of the composite primary key for the PersonTeam table, so that the rows
+of the PersonTeam table can be uniquely identified and can be used to identify person-team relationships.
+
+3. Does Intellij default to field or property annotations?
+IntelliJ defaults to property annotations as evidenced by the accessors and mutators in the entity classes.
+
+Exercise 12.3
+1. Does this application perform marshalling? If so, explain what the marshalling does; if not, explain why it’s not needed.
+Yes, the application performs marshalling. The marshalling converts the representation of the database object into JSON format to
+make it suitable for transmission.
+
+2. Does this code perform any injection? Again, explain…
+Yes, the code performs injection. It avoids direct object creation and does not have any hard dependencies. 
+The @PersistenceContext annotation is used to inject an EntityManager onto our stateless session bean. This class can be tested in isolation
+since a dependency injection is used.
+
+3. What does the entity manager do in this code, if anything?
+The entity manager in this code is used to find a person, given an id. It is also used to create the query for getting all the 
+people in the database
+
+Exercise 12.4

@@ -1,9 +1,7 @@
 package models;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by baa8 on 4/28/2017.
@@ -104,5 +102,16 @@ public class Household {
         result = 31 * result + (zipcode != null ? zipcode.hashCode() : 0);
         result = 31 * result + (phonenumber != null ? phonenumber.hashCode() : 0);
         return result;
+    }
+
+    private Collection<Person> person;
+
+    @OneToMany(mappedBy = "household")
+    public Collection<Person> getPerson() {
+        return person;
+    }
+
+    public void setPerson(Collection<Person> person) {
+        this.person = person;
     }
 }

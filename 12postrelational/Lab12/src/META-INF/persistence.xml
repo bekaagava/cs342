@@ -7,11 +7,13 @@
         <class>models.Person</class>
         <class>models.Personteam</class>
         <class>models.Team</class>
+        <class>models4.Person</class>
+        <class>models4.Household</class>
         <properties>
             <property name="eclipselink.jdbc.url" value="jdbc:oracle:thin:@//localhost:1521/XE"/>
             <property name="eclipselink.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
-            <property name="eclipselink.jdbc.user" value="cpdb"/>
-            <property name="eclipselink.jdbc.password" value="bjarne"/>
+            <property name="eclipselink.jdbc.user"/>
+            <property name="eclipselink.jdbc.password"/>
         </properties>
     </persistence-unit>
 </persistence>
