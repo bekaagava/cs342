@@ -1,4 +1,4 @@
-Exercise 12.1
+﻿Exercise 12.1
 
 1. Compare and contrast the database connection you built in Guide 12 (in Intellij IDEA) and this database connection (in GlassFish).
  Do we need both? If so, explain why; if not, explain why not.
@@ -34,3 +34,6 @@ The entity manager in this code is used to find a person, given an id. It is als
 people in the database
 
 Exercise 12.4
+1. How does JPA return the household and team entities related to a given person?
+The JPA connects to the Glassfish server with a JDBC connection and converts the household and team entities to JSON format and returns them 
+in the marshalled Person entity through the foreign key links.

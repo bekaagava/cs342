@@ -2,9 +2,10 @@ package models;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.List;
 
 /**
- * Created by baa8 on 4/28/2017.
+ * Created by baa8 on 4/29/2017.
  */
 @Entity
 public class Person {
@@ -17,22 +18,11 @@ public class Person {
     private Time birthdate;
     private String householdrole;
     private String homegrouprole;
-    private long householdid;
+    private Household household;
+    private List<Team> teams;
 
     @Id
     @Column(name = "ID")
-
-    @ManyToOne
-    @JoinColumn(name = "HOUSEHOLDID", referencedColumnName = "ID")
-    private Household household;
-
-    public long getName() {
-        return householdid;
-    }
-    public void setName(long householdid) {
-        this.householdid = householdid;
-    }
-
     public long getId() {
         return id;
     }
@@ -40,7 +30,6 @@ public class Person {
     public void setId(long id) {
         this.id = id;
     }
-
 
     @Basic
     @Column(name = "TITLE")
@@ -122,6 +111,26 @@ public class Person {
         this.homegrouprole = homegrouprole;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "HOUSEHOLDID", referencedColumnName = "ID")
+
+    public Household getHousehold() {
+        return household;
+    }
+
+    public void setHousehold(Household householdId) {
+        this.household = householdId;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "PERSONTEAM", schema = "CPDB",
+            joinColumns = @JoinColumn(name = "PERSONID", referencedColumnName = "ID", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "TEAMNAME", referencedColumnName = "NAME", nullable = false))
+
+    public List<Team> getTeams() { return teams;}
+
+    public void setTeams(List<Team> team) {this.teams = team; }
+
 
     @Override
     public boolean equals(Object o) {
@@ -142,6 +151,8 @@ public class Person {
             return false;
         if (homegrouprole != null ? !homegrouprole.equals(person.homegrouprole) : person.homegrouprole != null)
             return false;
+        if (household != null ? !household.equals(person.household) : person.household != null)
+            return false;
 
         return true;
     }
@@ -157,14 +168,7 @@ public class Person {
         result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
         result = 31 * result + (householdrole != null ? householdrole.hashCode() : 0);
         result = 31 * result + (homegrouprole != null ? homegrouprole.hashCode() : 0);
+        result = 31 * result + (household!= null ? household.hashCode() : 0);
         return result;
-    }
-
-    public Household getHousehold() {
-        return household;
-    }
-
-    public void setHousehold(Household household) {
-        this.household = household;
     }
 }
