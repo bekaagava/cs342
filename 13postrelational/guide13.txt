@@ -1,0 +1,48 @@
+1. Read Pramod Sadalage’s NoSQL Databases: An Overview (circa 2012) and explain:
+
+a. the key motivations for considering non-relational database systems.
+- The object-relational impedance mismatch. Using NoSQL database allows developers 
+to develop without having to convert in-memory structures to relational structures.
+- The movement towards encapsulating databases with applications and integrating using services.
+- The need to support large volumes of data by running on clusters that is a factor of 
+the rise of the web as a platform. Relational databases were not designed to run efficiently on clusters.
+
+b. aggregate data models.
+- An aggregate data model consists of a collection of data that is interacted with as a unit. These units of data (aggregates) form the boundaries for ACID operations with the database. Forms of aggregate-oriented databases include key-value, document, and column-family databases. Aggregates make it easier for the database to manage data storage over clusters, since the unit of data can now reside on any machine and when it is retrieved from the database it gets all the related data along with it.
+
+c. polyglot persistence.
+- This means that when storing data, it is best to use multiple data storage technologies,
+chosen based upon the way data is being used by individual applications or components of a single application. 
+
+d. the relevance of the CAP theorem.
+- It highlights that it is usually not possible for a distributed system to provide 
+all three requirements (Consistency, Availability and Partition-Tolerant) simultaneously 
+because one of them will always be compromised. So the database designer needs to prioritize the requirements for the database, and them choose. 
+
+e. the types of NoSQL databases.
+- Key-value databases: Key-values are the simplest NoSQL data stores to use from an API perspective. Some of the popular key-value databases are Riak, Redis, Memcached, and Couchbase.
+
+- Document databases: Documents are the main concept in document databases. The database stores and retrieves documents, which can be XML, JSON, BSON, etc. These documents are self-describing, hierarchical tree data structures which can consist of maps, collections, and scalar values.
+
+- Column family stores:  Column-family databases store data in column families as rows that have many columns associated with a row key. Column families are groups of related data that is often accessed together. Each column family can be compared to a container of rows in an RDBMS table where the key identifies the row and the row consists of multiple columns. The difference is that various rows do not have to have the same columns, and columns can be added to any row at any time without having to add it to other rows.
+
+- Graph Databases: Graph databases allow you to store entities and relationships between these entities. Entities are also known as nodes, which have properties. Relations are known as edges that can have properties. Edges have directional significance; nodes are organized by relationships which allow you to find interesting patterns between the nodes. The organization of the graph lets the data to be stored once and then interpreted in different ways based on relationships.
+
+f. when (and when not) to use NoSQL database systems.
+- when:
+	- To improve programmer productivity by using a database that better matches an 	application's needs.
+	- To improve data access performance via some combination of handling larger data 	volumes, reducing latency, and improving throughput.
+-when not:
+	- Problems requiring SQL. If your application depends upon SQL for queries, you're 	likely going to be better off with an RDBMS.
+	- Systems with a heavy emphasis on complex transactions such as banking systems 	and accounting. 
+	- Traditional Non-Realtime Data Warehousing. This is decreasingly the case, but 	historically this hasn't been a strong suit for NoSQL.
+
+An alternate source of this basic information is Martin Fowler’s Introduction to NoSQL video.
+
+2. Use “Getting Started with the Key/Value API”, Chapters 3–5, from the Oracle NoSQL Database documentation as a reference. Be sure to know how to:
+
+a. Compare and contrast Major and minor key components.
+	- Major key is similar to a primary key, while minor key components represent all 	other fields
+b. Use the appropriate commands to write and retrieve records.
+	- commands to write records: KVStore.put(), KVStore.putIfAbsent(), KVStore.putIfPresent(), KVStore.putIfVersion()
+	- commands to retrieve records: KVStore.get(), ValueVersion.getValue()
