@@ -1,0 +1,8 @@
+- Exercise 13.1
+
+Compare and contrast the store.put() command used here for KVLite and the em.persist() command you used for the GlassFish entity manager in the previous lab.
+
+
+
+
+Compare and contrast the store.put() command with the standard Java hashtable’s myHashTable.put() command.
