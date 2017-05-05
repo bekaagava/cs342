@@ -21,6 +21,8 @@ public class Person {
     private Household household;
     private List<Team> teams;
 
+    @GeneratedValue(generator = "cpdbSequence")
+    @SequenceGenerator(name = "cpdbSequence", sequenceName = "cpdb_sequence", allocationSize = 1)
     @Id
     @Column(name = "ID")
     public long getId() {
@@ -113,11 +115,9 @@ public class Person {
 
     @ManyToOne
     @JoinColumn(name = "HOUSEHOLDID", referencedColumnName = "ID")
-
     public Household getHousehold() {
         return household;
     }
-
     public void setHousehold(Household householdId) {
         this.household = householdId;
     }
@@ -127,10 +127,10 @@ public class Person {
             joinColumns = @JoinColumn(name = "PERSONID", referencedColumnName = "ID", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "TEAMNAME", referencedColumnName = "NAME", nullable = false))
 
+
     public List<Team> getTeams() { return teams;}
 
     public void setTeams(List<Team> team) {this.teams = team; }
-
 
     @Override
     public boolean equals(Object o) {
