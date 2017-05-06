@@ -1,8 +1,26 @@
 - Exercise 13.1
 
-Compare and contrast the store.put() command used here for KVLite and the em.persist() command you used for the GlassFish entity manager in the previous lab.
+a. Compare and contrast the store.put() command used here for KVLite and the em.persist() command you used for the GlassFish entity manager in the previous lab.
+
+- The store.put() and em.persist() commands are used to create - store.put() creates a new key-value pair record in the store or updates a record that already exists with that key; em.persist() can only create new records, and cannot be used to update existing ones. 
+
+- em.persist() uses the mapping between the java object and the relational object, but store.put() can write directly to the database. 
 
 
+b. Compare and contrast the store.put() command with the standard Java hashtable’s myHashTable.put() command.
+
+- store.put() and myHashTable.put() use key-value mapping. However, store.put() writes to the KVLite store, which is persistent, and myHashTable.put() writes to a hash table which would be stored in main memory. 
 
 
-Compare and contrast the store.put() command with the standard Java hashtable�s myHashTable.put() command.
+- Exercise 13.2
+a. Compare and contrast KVLite keys with relational database keys.
+- KVLite keys are used to refer to the value(s) that are stored with those keys. They cannot get mapped to another entity, therefore cannot define a relationship between two entities. Relational database keys are used to identify the rest of the record, and also used for the relationship between to entities (one-to-many and many-to-many relationships). 
+
+- Exercise 13.3
+a. So far, the implementation has only dealt with records in one relational table, Movie. Explain how a key-value database might implement the one-to-many join relationships commonly implemented in relational databases using foreign keys.
+
+- A key-value database, like KVLite might implement the one-to-many relationships using tree structures. One key can map to many values, and one or more of these values could be another key-value pair for a different entity. 
+
+b. KVLite requires that there be a key, but it is possible to have an “empty” value. Such a value can be created using Value.createValue(new byte[0]). Where might one need such a construct?
+
+- An “empty” value could be useful for reversing the directory structure. This is helpful when dealing with many-to-many relationships. 
