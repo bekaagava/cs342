@@ -1,0 +1,32 @@
+
+1. Read Section 30.1:
+	a. Name and explain the four kinds of control measures required for database security.
+
+	i. Access control: The security mechanism of a DBMS must include provisions for restricting access to the database system as a whole. This function is handled by creating user accounts and passwords to control the login process by the DBMS.
+
+	ii. Inference control: It is sometimes possible to deduce or infer certain facts concerning individuals from queries that involve only summary statistics on groups; this must not be permitted. The corresponding control measures are called inference control measures.
+
+	iii. Flow control: Flow control prevents information from flowing in such a way 	that it reaches unauthorized users.
+
+	iv. Data encryption: Data encryption is used to protect sensitive data (such as credit card numbers) that is transmitted via some type of communications network. Encryption can be used to provide additional protection for sensitive portions of a database as well. The data is encoded using some coding algorithm. An unauthorized user who accesses encoded data will have difficulty deciphering it, but authorized users are given decoding or decrypting algorithms (or keys) to decipher the data. 
+
+
+	b. Compare and contrast information security and information privacy.
+	
+	- Security in information technology refers to many aspects of protecting a system from unauthorized use, including authentication of users, information encryption, access control, firewall policies, and intrusion detection.
+
+	- The concept of privacy goes beyond security. Privacy examines how well the use of personal information that the system acquires about a user conforms to the explicit or implicit assumptions regarding that use. From an end user perspective, privacy can be considered from two different perspectives: preventing storage of personal information versus ensuring appropriate use of personal information.
+
+	- Security involves technology to ensure that information is appropriately protected. Security is a required building block for privacy. Privacy involves mechanisms to support compliance with some basic principles and other explicitly stated policies.
+
+2. Read Imperva’s Top 5 Database Security Threats.
+	a. Name and explain the security threats discussed in the article.
+	
+	i. Excessive, inappropriate, and unused privileges: Granting database privileges that exceed the requirements of the particular job function, can result in the abuse of these privileges.The complexity of applications and the corresponding data structures used mean that administrators are inclined to grant excessive privileges by default just to avoid the risk of application failure due to lack of access privileges. Thus, users may be granted generic or default access privileges that far exceed their specific job requirements, or they may simply accumulate such privileges over time.
+
+	ii. Privilege abuse: Database service accounts could be used to access databases, and these users can misuse their privileged service accounts to access sensitive data directly, bypassing the application interface.In addition, certain “Privileged Users” may abuse legitimate database privileges for unauthorized purposes. Certain user groups in the organization have privileges to access entire databases due to their occupation and activities.
+	iii. Insufficient web application security: Most organizations rely heavily on apps to interface with customers. There are many types of attacks on applications that can expose data. Two common types of web application attacks that target databases are SQL Injection (SQLi) and Web Shell.
+SQLi attacks are a result of incomplete or inadequate input validation that allows bad actors to pass SQL commands to the database via the web application in a manner that was never anticipated.
+Web Shell attacks are a stealthy method used to gain unauthorized remote access to a server. Web shells are backdoors that utilize the web server core functionality (serving remote clients) to gain persistent remote access and obtain full or limited control over the server through an interface to the server’s shell.
+	iv. Weak audit trails: This is a threat caused by insufficient internal processes or gaps. The failure to monitor for both security and compliance anomalies and collect the appropriate audit details of database activity represents a serious organizational risk at many levels.
+	v. Unsecured storage media: Typically, backup storage media is completely unprotected. Numerous security breaches have involved the theft or incidental exposure of database backup disks and tapes. In addition, highly privileged users will often have direct physical access to the database servers. This physical proximately means they can insert thumb or USB drives and execute SQL commands directly to the database that will shut off native audit and bypass all protection mechanisms except those deployed at the kernel level of the database server.  
