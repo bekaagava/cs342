@@ -1,6 +1,7 @@
 
 /**
  * Created by baa8 on 5/12/2017.
+ * Movie - Creates a Movie with id, name, year and rank
  */
 public class Movie {
     private String myId;
