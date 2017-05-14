@@ -30,6 +30,10 @@ public class LoadDB {
         while (recipeResultSet.next()) {
 
             //pulling the name: recipe/id/-/name
+            Key nameKey = Key.createKey(Arrays.asList("recipe", recipeResultSet.getString(1)), Arrays.asList("name"));
+            Value nameValue = Value.createValue(recipeResultSet.getString(2).getBytes());
+            store.put(nameKey, nameValue);
+            
             Key nameKeyPath = Key.createKey(Arrays.asList("recipe", recipeResultSet.getString(1)), Arrays.asList("name"));
             Map<Key, ValueVersion> fields = store.multiGet(nameKeyPath, null, null);
             for (Map.Entry<Key, ValueVersion> field : fields.entrySet()) {
@@ -37,7 +41,11 @@ public class LoadDB {
                 System.out.println(nameKeyPath.toString() + "\t" + ":" + "\t" + fieldValue);
             }
 
-            //pulling the name: recipe/id/-/description
+            //pulling the description: recipe/id/-/description
+            Key descriptionKey = Key.createKey(Arrays.asList("recipe", recipeResultSet.getString(1)), Arrays.asList("description"));
+            Value descriptionValue = Value.createValue(recipeResultSet.getString(3).getBytes());
+            store.put(descriptionKey, descriptionValue);
+            
             Key descriptionKeyPath = Key.createKey(Arrays.asList("recipe", recipeResultSet.getString(1)), Arrays.asList("description"));
             Map<Key, ValueVersion> descriptionFields = store.multiGet(descriptionKeyPath, null, null);
             for (Map.Entry<Key, ValueVersion> descriptionField : descriptionFields.entrySet()) {
@@ -45,7 +53,11 @@ public class LoadDB {
                 System.out.println(descriptionKeyPath.toString() + "\t" + ":" + "\t" + fieldValue);
             }
 
-            //pulling the name: recipe/id/-/durationUnit
+            //pulling the durationUnit: recipe/id/-/durationUnit
+            Key durationUKey = Key.createKey(Arrays.asList("recipe", recipeResultSet.getString(1)), Arrays.asList("durationUnit"));
+            Value durationUValue = Value.createValue(recipeResultSet.getString(4).getBytes());
+            store.put(durationUKey, durationUValue);
+            
             Key durationUKeyPath = Key.createKey(Arrays.asList("recipe", recipeResultSet.getString(1)), Arrays.asList("durationUnit"));
             Map<Key, ValueVersion> durationUFields = store.multiGet(durationUKeyPath, null, null);
             for (Map.Entry<Key, ValueVersion> durationField : durationUFields.entrySet()) {
@@ -53,7 +65,11 @@ public class LoadDB {
                 System.out.println(durationUKeyPath.toString() + "\t" + ":" + "\t" + fieldValue);
             }
 
-            //pulling the name: recipe/id/-/durationNumber
+            //pulling the durationNumber: recipe/id/-/durationNumber
+            Key durationNKey = Key.createKey(Arrays.asList("recipe", recipeResultSet.getString(1)), Arrays.asList("durationNumber"));
+            Value durationNValue = Value.createValue(recipeResultSet.getString(5).getBytes());
+            store.put(durationNKey, durationNValue);
+            
             Key durationNKeyPath = Key.createKey(Arrays.asList("recipe", recipeResultSet.getString(1)), Arrays.asList("durationNumber"));
             Map<Key, ValueVersion> durationNFields = store.multiGet(durationNKeyPath, null, null);
             for (Map.Entry<Key, ValueVersion> durationNField : durationNFields.entrySet()) {
@@ -69,6 +85,10 @@ public class LoadDB {
         while (ingredientResultSet.next()) {
 
             //pulling the name: ingredient/id/-/name
+            Key nameKey = Key.createKey(Arrays.asList("ingredient", ingredientResultSet.getString(1)), Arrays.asList("name"));
+            Value nameValue = Value.createValue(ingredientResultSet.getString(2).getBytes());
+            store.put(nameKey, nameValue);
+            
             Key nameKeyPath = Key.createKey(Arrays.asList("ingredient", ingredientResultSet.getString(1)), Arrays.asList("name"));
             Map<Key, ValueVersion> nameFields = store.multiGet(nameKeyPath, null, null);
             for (Map.Entry<Key, ValueVersion> nameField : nameFields.entrySet()) {
@@ -77,6 +97,10 @@ public class LoadDB {
             }
 
             //pulling the kind: ingredient/id/-/kind
+            Key kindKey = Key.createKey(Arrays.asList("ingredient", ingredientResultSet.getString(1)), Arrays.asList("kind"));
+            Value kindValue = Value.createValue(ingredientResultSet.getString(3).getBytes());
+            store.put(kindKey, kindValue);
+            
             Key kindKeyPath = Key.createKey(Arrays.asList("ingredient", ingredientResultSet.getString(1)), Arrays.asList("kind"));
             Map<Key, ValueVersion> kindFields = store.multiGet(kindKeyPath, null, null);
             for (Map.Entry<Key, ValueVersion> kindField : kindFields.entrySet()) {
@@ -92,6 +116,10 @@ public class LoadDB {
 
             // recipeIngredient/recipeId/IngredientId/-/quantity/
             //this stores the quantity as a minor key, so that it returns all the quantities for each ingredient, since the quantities apply to multiple
+            Key quantityKey = Key.createKey(Arrays.asList("recipeIngredient", riResultSet.getString(1), riResultSet.getString(2)), Arrays.asList("quantity"));
+            Value quantityValue = Value.createValue(riResultSet.getString(3).getBytes());
+            store.put(quantityKey, quantityValue);
+            
             Key quantityKeyPath = Key.createKey(Arrays.asList("recipeIngredient", riResultSet.getString(1), riResultSet.getString(2)), Arrays.asList("quantity"));
             Map<Key, ValueVersion> quantityFields = store.multiGet(quantityKeyPath, null, null);
             for (Map.Entry<Key, ValueVersion> quantityField : quantityFields.entrySet()) {
@@ -101,6 +129,10 @@ public class LoadDB {
 
             // recipeIngredient/recipeId/IngredientId/-/unit/
             //this stores the unit name as a minor key, so that it returns all the units for each ingredient, since the units apply to multiple
+            Key unitKey = Key.createKey(Arrays.asList("recipeIngredient", riResultSet.getString(1), riResultSet.getString(2)), Arrays.asList("unit"));
+            Value unitValue = Value.createValue(riResultSet.getString(4).getBytes());
+            store.put(unitKey, unitValue);
+            
             Key unitKeyPath = Key.createKey(Arrays.asList("recipeIngredient", riResultSet.getString(1), riResultSet.getString(2)), Arrays.asList("unit"));
             Map<Key, ValueVersion> unitFields = store.multiGet(unitKeyPath, null, null);
             for (Map.Entry<Key, ValueVersion> unitField : unitFields.entrySet()) {
@@ -114,6 +146,11 @@ public class LoadDB {
         while (kindResultSet.next()) {
 
             // kind/-/kind/id
+            Key key = Key.createKey("kind", Arrays.asList(kindResultSet.getString(1), kindResultSet.getString(2)));
+            // name value
+            Value value = Value.createValue(kindResultSet.getString(3).getBytes());
+            store.putIfAbsent(key, value); 
+            
             Key indexKey = Key.createKey("kind", Arrays.asList(kindResultSet.getString(1), kindResultSet.getString(2)));
             Map<Key, ValueVersion> unitFields = store.multiGet(indexKey, null, null);
             for (Map.Entry<Key, ValueVersion> unitField : unitFields.entrySet()) {
