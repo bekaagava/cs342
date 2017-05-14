@@ -13,8 +13,9 @@ import java.util.Map;
  * My application contains a lot of many-to-one and many-to-many relationships.
  * Key-Value stores are not very useful for databases that require a lot of join tables.
  *
- * LoadDB pulls data from the OracleXE IMDB Movie, Actor and Role tables
- * and loads it into Oracle KVLite using a key-value structure
+ * LoadDB pulls data from the OracleXE RFIDDB RECIPE, INGREDIENT and RECIPEINGREDIENT tables
+ * and loads it into Oracle KVLite using a key-value structure. It will be useful for application developers to access the RFIDDB database
+ * records, and store them in a key-value database that doesn't have most of SQL relational database problems.
  */
 
 public class LoadDB {
