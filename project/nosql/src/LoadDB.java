@@ -9,6 +9,10 @@ import java.util.Map;
 
 /**
  * Created by baa8 on 5/12/2017.
+ * Oracle’s KVLite key-value system is not the best type of noSQL database for my application. 
+ * My application contains a lot of many-to-one and many-to-many relationships.
+ * Key-Value stores are not very useful for databases that require a lot of join tables.
+ *
  * LoadDB pulls data from the OracleXE IMDB Movie, Actor and Role tables
  * and loads it into Oracle KVLite using a key-value structure
  */
