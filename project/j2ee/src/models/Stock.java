@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import java.sql.Time;
 
 /**
+ * This class defined the Stock entity of the RFID database.
+ *
  * Created by baa8 on 5/13/2017.
  */
 @Entity
