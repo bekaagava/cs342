@@ -2,5 +2,4 @@ Smart Refrigerator:
 
 The objective of this project is to create a database to centrally handle the 
 information for a Smart Refrigerator application that provides information on the items in the refrigerator, 
-allows the use of recipes, and the creation of shopping lists. The potential users/stakeholders for this project
-include domestic users (which would include meal planners), restaurants (which would include chefs) and labs (which would include lab technicians and chemists). 
+allows the use of recipes, allows for multiple owners of the refrigerator and the items in the refrigerator and the creation of shopping lists. The potential users/stakeholders for this project include domestic users (which would include meal planners, shoppers), restaurant users (which would include chefs, the person who updates the shopping list for ingredients the restaurant needs) and labs (which would include lab technicians and chemists).
