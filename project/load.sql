@@ -1,5 +1,4 @@
 -- Load the RFID fridge database. 
--- See ../README.md for details.
 
 -- Drop the previous table declarations.
 @&rfidDB\drop         
