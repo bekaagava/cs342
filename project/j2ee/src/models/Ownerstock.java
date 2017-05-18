@@ -3,6 +3,8 @@ package models;
 import javax.persistence.*;
 
 /**
+ * This class defines the many-to-many relationship between owners and stocks.
+ *
  * Created by baa8 on 5/13/2017.
  */
 @Entity
