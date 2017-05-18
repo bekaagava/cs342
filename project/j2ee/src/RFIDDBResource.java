@@ -23,7 +23,8 @@ import java.util.*;
  * id, the user of this webservice can delete an owner if for example, they move out and stop using a smart refrigerator that
  * is monitored by this database.
  *
- * Created by baa8 on 5/13/2017.
+ * @author: Beka Agava, baa8
+ * @version: Spring 2017
  */
 @Stateless
 @Path("rfiddb")
