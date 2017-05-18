@@ -1,5 +1,4 @@
 -- Create the RFID Fridge user and database. 
--- See ../README.txt for details.
 
 -- Create the user. 
 DROP USER rfidDB CASCADE;
