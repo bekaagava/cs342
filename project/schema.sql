@@ -1,3 +1,5 @@
+-- Defines the schema for the RFID database along with necessary constraints
+
 create table Fridge(
 	ID integer PRIMARY KEY,
 	brand varchar (50),
