@@ -1,3 +1,5 @@
+-- This file populates all the tables in the RFID database with values
+
 INSERT INTO Fridge (ID,brand,model,street,city,state,zipcode) VALUES (fridge_sequence.nextval,'Dolor Sit Amet Incorporated','R5O8','905-9831 Aliquam Street','Atlanta','GA','91781');
 INSERT INTO Fridge (ID,brand,model,street,city,state,zipcode) VALUES (fridge_sequence.nextval,'Vitae Sodales Inc.','Y5I9','Ap #435-7322 In Av.','Kansas City','KS','13052');
 INSERT INTO Fridge (ID,brand,model,street,city,state,zipcode) VALUES (fridge_sequence.nextval,'Non Consulting','K0T3','2395 Aliquam Road','Evansville','IN','92424');
