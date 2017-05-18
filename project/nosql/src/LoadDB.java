@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Map;
 
 /**
- * 
  * LoadDB pulls data from the OracleXE RFIDDB RECIPE, INGREDIENT and RECIPEINGREDIENT tables
  * and loads it into Oracle KVLite using a key-value structure. It will be useful for application developers to access the RFIDDB database
  * records, and store them in a key-value database that doesn't have most of SQL relational database problems.
@@ -30,6 +29,9 @@ import java.util.Map;
  *      recipeIngredient/$recipeId/$IngredientId/-/unit : $unit
  *      
  *      kind/-/$kind/$id : NO_VALUE - used to sort ingredients by kind in GetSortedIngredients
+ *
+ * @author: Beka Agava, baa8
+ * @version: Spring 2017
  */
 
 public class LoadDB {
