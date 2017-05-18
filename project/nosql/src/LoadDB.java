@@ -8,14 +8,28 @@ import java.util.Arrays;
 import java.util.Map;
 
 /**
- * Created by baa8 on 5/12/2017.
- * Oracle’s KVLite key-value system is not the best type of noSQL database for my application. 
- * My application contains a lot of many-to-one and many-to-many relationships.
- * Key-Value stores are not very useful for databases that require a lot of join tables.
- *
+ * 
  * LoadDB pulls data from the OracleXE RFIDDB RECIPE, INGREDIENT and RECIPEINGREDIENT tables
  * and loads it into Oracle KVLite using a key-value structure. It will be useful for application developers to access the RFIDDB database
  * records, and store them in a key-value database that doesn't have most of SQL relational database problems.
+ *
+ * Oracle’s KVLite key-value system is not the best type of noSQL database for my application. 
+ * My application contains a lot of many-to-one and many-to-many relationships.
+ * Key-Value stores are not very useful for databases that require a lot of join tables.
+ * 
+ * Key and Key-Value structures:
+ *      recipe/$id/-/name    :   $name
+ *      recipe/$id/-/description : $description
+ *      recipe/$id/-/durationUnit   :   $durationUnit
+ *      recipe/$id/-/durationNumber :   $durationNumber
+ *
+ *      ingredient/$id/-/name : $name - used in GetRecipeIngredients
+ *      ingredient/$id/-/kind : $kind   - used in GetrecipeIngredients
+ *      
+ *      recipeIngredient/$recipeId/$IngredientId/-/quantity  : $quantity - used in GetRecipeIngredients
+ *      recipeIngredient/$recipeId/$IngredientId/-/unit : $unit
+ *      
+ *      kind/-/$kind/$id : NO_VALUE - used to sort ingredients by kind in GetSortedIngredients
  */
 
 public class LoadDB {
