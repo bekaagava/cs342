@@ -1,3 +1,5 @@
+-- This file drops all the tables and sequences in the RFID database
+
 drop table OwnerStock;
 drop table RecipeIngredient;
 drop table OwnerRecipe;
