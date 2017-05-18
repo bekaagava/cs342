@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
+ * This class defines the Owner entity for the RFID database. It defines all the attributes for the entity, including
+ * the one-to-many and many-to-many relationships.
+ *
  * Created by baa8 on 5/13/2017.
  */
 @Entity
@@ -78,6 +81,7 @@ public class Owner {
         this.phonenumber = phonenumber;
     }
 
+    //The many-to-one relationship for owners to their fridge
     @ManyToOne
     @JoinColumn(name = "FRIDGEID", referencedColumnName = "ID")
     public Fridge getFridge() {
@@ -87,6 +91,7 @@ public class Owner {
         this.fridge = fridgeId;
     }
 
+    //The many-to-many relationship for owners and their stock in their fridge
     @ManyToMany
     @JoinTable(name = "OWNERSTOCK", schema = "RFIDDB",
             joinColumns = @JoinColumn(name = "OWNERID", referencedColumnName = "ID", nullable = false),
