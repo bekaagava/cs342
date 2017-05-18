@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
+ * This class defines the Fridge entity for the RFID database. It defines all the attributes for the entity.
+ *
  * Created by baa8 on 5/13/2017.
  */
 @Entity
