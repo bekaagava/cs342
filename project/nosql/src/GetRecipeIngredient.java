@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 /**
- * Created by baa8 on 5/13/2017.
  * GetRecipeIngredient - Gets the ingredients, when given a recipe ID
  * This will be useful to the application developer to produce all the ingredients used in a recipe, as users will need
- * this information to create shopping lists for example
+ * this information to create shopping lists for example.
+ *
+ * @author: Beka Agava, baa8
+ * @version: Spring 2017
  */
 public class GetRecipeIngredient {
 
