@@ -30,8 +30,8 @@ import java.util.*;
 public class RFIDDBResource {
 
     /**
-     * JPA creates and maintains a managed entity manager with an integrated JTA that we can inject here.
-     *     E.g., http://wiki.eclipse.org/EclipseLink/Examples/REST/GettingStarted
+     * JPA creates and maintains a managed entity manager with an integrated JTA that can be injected here.
+     *  
      */
     @PersistenceContext
     private EntityManager em;
@@ -66,6 +66,9 @@ public class RFIDDBResource {
      * PUT - modifies the given owner entity, if it exists, using the values in the JSON-formatted owner entity
      * passed with the request
      *
+     * @param id the ID of the owner to modify
+     * @return an owner record
+     *
      * This is useful for an application developer to modify owner records in a case like updating their phone numbers
      * from a null value
      */
@@ -90,6 +93,9 @@ public class RFIDDBResource {
     /**
      * POST a new owner to the database
      *
+     * @param id the ID of the owner to create
+     * @return an owner record
+     *
      * This is useful to an application developer for creating a new owner for an RFID fridge in the
      * database in the case where the owner has just moved into an apartment with one of the RFID fridges
      */
@@ -107,6 +113,9 @@ public class RFIDDBResource {
 
     /**
      * DELETE the person with the given ID, if it exists
+     *
+     * @param id the ID of the owner to delete
+     * @return string : success message
      *
      * This allows an application developer delete an owner who is no longer using an RFID refrigerator
      */
