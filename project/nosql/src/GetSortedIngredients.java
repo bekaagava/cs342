@@ -5,10 +5,14 @@ import java.sql.SQLException;
 import java.util.*;
 
 /**
- * Created by baa8 on 5/13/2017.
  * GetSortedIngredients gets the ingredients that exist in the database sorted by kind. This will be useful to the application developer
- * quick knowledge of the different kinds of ingredients and to approximate which kind is more at first glance. It also provides easy grouping
+ * quick knowledge of the different kinds of ingredients and to approximate which kind is more at first glance. It also provides easy grouping.
+ * 
+ * Evaluating the database: Since the key-value structure does not care or control what the values are, it is difficult to sort by any of 
+ * the values. A special key-value structure kind/-/$kind/$id : $name had to be created to enable sorting. 
  *
+ * @author: Beka Agava, baa8
+ * @version: Spring 2017
  */
 public class GetSortedIngredients {
 
